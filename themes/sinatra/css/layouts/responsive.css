@@ -1,0 +1,591 @@
+/**
+ * @file
+ * Positioning for a responsive layout.
+ *
+ * Define CSS classes to create a fluid grid layout with optional sidebars
+ * depending on whether blocks are placed in the left or right sidebars.
+ *
+ * This layout uses the Zen Grids plugin for Compass: http://zengrids.com
+ */
+
+/**
+ * Center the page.
+ *
+ * For screen sizes larger than 1200px, prevent excessively long lines of text
+ * by setting a max-width.
+ */
+#page,
+.region-bottom {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
+}
+
+/* Apply the shared properties of grid items in a single, efficient ruleset. */
+#header,
+#content,
+#navigation,
+.region-sidebar-first,
+.region-sidebar-second,
+#footer {
+  padding-left: 10px;
+  padding-right: 10px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  *behavior: url("/path/to/boxsizing.htc");
+  _display: inline;
+  _overflow: hidden;
+  _overflow-y: visible;
+}
+
+/* Containers for grid items and flow items. */
+#header,
+#main,
+#footer {
+  *position: relative;
+  *zoom: 1;
+}
+#header:before,
+#header:after,
+#main:before,
+#main:after,
+#footer:before,
+#footer:after {
+  content: "";
+  display: table;
+}
+#header:after,
+#main:after,
+#footer:after {
+  clear: both;
+}
+
+/* Navigation bar */
+@media all and (min-width: 480px) {
+  #main {
+    /* Move all the children of #main down to make room. */
+    padding-top: 1em;
+    position: relative;
+  }
+  #navigation {
+    /* Move the navbar up inside #main's padding. */
+    position: absolute;
+    top: 0;
+    height: 3em;
+    width: 100%;
+  }
+}
+
+/**
+ * Use 3 grid columns for smaller screens.
+ */
+@media all and (min-width: 480px) and (max-width: 959px) {
+
+  /**
+   * The layout when there is only one sidebar, the left one.
+   */
+
+  /* Span 2 columns, starting in 2nd column from left. */
+  .sidebar-first #content {
+    float: left;
+    width: 66.66667%;
+    margin-left: 33.33333%;
+    margin-right: -100%;
+  }
+
+  /* Span 1 column, starting in 1st column from left. */
+  .sidebar-first .region-sidebar-first {
+    float: left;
+    width: 33.33333%;
+    margin-left: 0%;
+    margin-right: -33.33333%;
+  }
+
+  /**
+   * The layout when there is only one sidebar, the right one.
+   */
+
+  /* Span 2 columns, starting in 1st column from left. */
+  .sidebar-second #content {
+    float: left;
+    width: 66.66667%;
+    margin-left: 0%;
+    margin-right: -66.66667%;
+  }
+
+  /* Span 1 column, starting in 3rd column from left. */
+  .sidebar-second .region-sidebar-second {
+    float: left;
+    width: 33.33333%;
+    margin-left: 66.66667%;
+    margin-right: -100%;
+  }
+
+  /**
+   * The layout when there are two sidebars.
+   */
+
+  /* Span 2 columns, starting in 2nd column from left. */
+  .two-sidebars #content {
+    float: left;
+    width: 66.66667%;
+    margin-left: 33.33333%;
+    margin-right: -100%;
+  }
+
+  /* Span 1 column, starting in 1st column from left. */
+  .two-sidebars .region-sidebar-first {
+    float: left;
+    width: 33.33333%;
+    margin-left: 0%;
+    margin-right: -33.33333%;
+  }
+
+  /* Start a new row and span all 3 columns. */
+  .two-sidebars .region-sidebar-second {
+    float: left;
+    width: 100%;
+    margin-left: 0%;
+    margin-right: -100%;
+    padding-left: 0;
+    padding-right: 0;
+    clear: left;
+  }
+
+  /* Apply the shared properties of grid items in a single, efficient ruleset. */
+  .two-sidebars .region-sidebar-second .block {
+    padding-left: 10px;
+    padding-right: 10px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    *behavior: url("/path/to/boxsizing.htc");
+    _display: inline;
+    _overflow: hidden;
+    _overflow-y: visible;
+  }
+
+  /* Span 1 column, starting in the 1st column from left. */
+  .two-sidebars .region-sidebar-second .block:nth-child(3n+1) {
+    float: left;
+    width: 33.33333%;
+    margin-left: 0%;
+    margin-right: -33.33333%;
+    clear: left;
+  }
+
+  /* Span 1 column, starting in the 2nd column from left. */
+  .two-sidebars .region-sidebar-second .block:nth-child(3n+2) {
+    float: left;
+    width: 33.33333%;
+    margin-left: 33.33333%;
+    margin-right: -66.66667%;
+  }
+
+  /* Span 1 column, starting in the 3rd column from left. */
+  .two-sidebars .region-sidebar-second .block:nth-child(3n) {
+    float: left;
+    width: 33.33333%;
+    margin-left: 66.66667%;
+    margin-right: -100%;
+  }
+}
+
+/**
+ * Use 5 grid columns for larger screens.
+ */
+@media all and (min-width: 960px) {
+
+  /**
+   * The layout when there is only one sidebar, the left one.
+   */
+
+  /* Span 4 columns, starting in 2nd column from left. */
+  .sidebar-first #content {
+    float: left;
+    width: 80%;
+    margin-left: 17%;
+    margin-right: -100%;
+  }
+
+  /* Span 1 column, starting in 1st column from left. */
+  .sidebar-first .region-sidebar-first {
+    float: left;
+    width: 20%;
+    margin-left: 0%;
+    margin-right: -20%;
+  }
+
+  /**
+   * The layout when there is only one sidebar, the right one.
+   */
+
+  /* Span 4 columns, starting in 1st column from left. */
+  .sidebar-second #content {
+    float: left;
+    width: 80%;
+    margin-left: 0%;
+    margin-right: -80%;
+  }
+
+  /* Span 1 column, starting in 5th column from left. */
+  .sidebar-second .region-sidebar-second {
+    float: left;
+    width: 20%;
+    margin-left: 80%;
+    margin-right: -100%;
+  }
+
+  /**
+   * The layout when there are two sidebars.
+   */
+
+  /* Span 3 columns, starting in 2nd column from left. */
+  .two-sidebars #content {
+    float: left;
+    width: 60%;
+    margin-left: 20%;
+    margin-right: -80%;
+  }
+
+  /* Span 1 column, starting in 1st column from left. */
+  .two-sidebars .region-sidebar-first {
+    float: left;
+    width: 20%;
+    margin-left: 0%;
+    margin-right: -20%;
+  }
+
+  /* Span 1 column, starting in 5th column from left. */
+  .two-sidebars .region-sidebar-second {
+    float: left;
+    width: 20%;
+    margin-left: 80%;
+    margin-right: -100%;
+  }
+}
+
+html {
+	color: #000000;
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+a {
+	color: #d35400;
+    text-decoration: none;
+}
+
+#rec {
+	float: left;
+	width: 100%;
+	clear: both;
+}
+
+#rec-left-col {
+clear: left;
+	float: left;
+	width: 23%;
+	padding: 5px 5px;
+	margin: 0 0 0 0;
+	display: inline;
+}
+
+.infobox, .table_title, .table_contents {
+	border: 2px solid #E08283;
+}
+
+.table_title {
+	font-weight: bold;
+}
+
+.listen {
+	padding: 10px;
+}
+
+.related_title {
+	width:33%;
+}
+
+#rec-right-col {
+float: left;
+	width: 73%;
+	padding: 5px 5px;
+	margin: 0 10px 0 0;
+	display: inline;
+}
+
+#content {
+	border: 5px solid orange;
+	border-top-left-radius: 25px 25px;
+	border-bottom-right-radius: 25px 25px;
+	border-top-right-radius: 25px 25px;
+	border-bottom-left-radius: 25px 25px;
+	float: left;
+width: 90%;
+margin-left: 5%;
+margin-right: 5%;
+	background: #C5EFF7;
+	/*color:#DEC1FF;*/
+}
+
+.browse {
+	height:500px;
+	overflow:auto;
+}
+
+.person-recording {
+	max-height:300px;
+	overflow:auto;
+	margin-top: -10px;
+}
+
+.person-recording ul {
+	margin: 0;
+}
+
+body {
+	/* background-image:url("bg.jpg");
+	background-repeat: no-repeat;
+	background-size: 100%;*/
+	background: #FDE3A7;
+
+}
+
+ 
+.block-title {display:none;}
+.header__secondary-menu { display:none;}
+
+.menu__item {
+	display:inline;
+}
+
+ul.nice-menu li {
+	padding-left:20px;
+	padding-right:20px;
+}
+
+ul.nice-menu  li {
+	background:#C5EFF7;
+	border: 1px solid #fff;
+	color: #000000;
+}
+
+ul.nice-menu-down li.menuparent, ul.nice-menu-down li.menuparent:hover {
+		background:#C5EFF7 url("../../images/arrow-down.png") right center no-repeat;
+}
+ul.nice-menu li a  {
+	color: #000000;
+    text-decoration: none;
+}
+
+/*#lyrics {
+	font-style: italic;
+}
+*/
+/*
+li.first {
+border: 1px solid orange;
+	border-bottom-left-radius: 25px 25px;
+
+	}
+
+	li.last {
+	border-bottom-right-radius: 25px 25px;
+
+	}/*
+
+/* $Id: example.css,v 1.5 2006/03/27 02:44:36 pat Exp $ */
+
+/*--------------------------------------------------
+  REQUIRED to hide the non-active tab content.
+  But do not hide them in the print stylesheet!
+  --------------------------------------------------*/
+.tabberlive .tabbertabhide {
+	display:none;
+}
+
+/*--------------------------------------------------
+  .tabber = before the tabber interface is set up
+  .tabberlive = after the tabber interface is set up
+  --------------------------------------------------*/
+.tabber {
+}
+.tabberlive {
+	margin-top:1em;
+}
+
+/*--------------------------------------------------
+  ul.tabbernav = the tab navigation list
+  li.tabberactive = the active tab
+  --------------------------------------------------*/
+ul.tabbernav
+{
+ margin:0;
+ padding: 3px 0;
+ border-bottom: 1px solid #778;
+ font: bold 12px Verdana, sans-serif;
+}
+
+ul.tabbernav li
+{
+ list-style: none;
+ margin: 0;
+ display: inline-block;
+ /*width: 20%;*/
+}
+
+ul.tabbernav li a
+{
+	padding: 3px 0.5em;
+	margin-left: 3px;
+	border: 1px solid #778;
+	border-bottom: none;
+	background: #DDE;
+	text-decoration: none;
+	/*padding-right: 20%;
+	padding-left: 20%;*/
+	border-top-left-radius: 10px 10px;
+	border-top-right-radius: 10px 10px;
+
+}
+
+ul.tabbernav li a:link { color: #448; }
+ul.tabbernav li a:visited { color: #667; }
+
+ul.tabbernav li a:hover
+{
+ color: #000;
+ background: #AAE;
+ border-color: #227;
+}
+
+ul.tabbernav li.tabberactive a
+{
+ background-color: #fff;
+ border-bottom: 1px solid #fff;
+}
+
+ul.tabbernav li.tabberactive a:hover
+{
+ color: #000;
+ background: white;
+ border-bottom: 1px solid white;
+}
+
+/*--------------------------------------------------
+  .tabbertab = the tab content
+  Add style only after the tabber interface is set up (.tabberlive)
+  --------------------------------------------------*/
+.tabberlive .tabbertab {
+ padding:5px;
+ border:1px solid #aaa;
+ border-top:0;
+
+ /* If you don't want the tab size changing whenever a tab is changed
+    you can set a fixed height */
+
+ /* height:200px; */
+
+ /* If you set a fix height set overflow to auto and you will get a
+    scrollbar when necessary */
+
+ /* overflow:auto; */
+}
+
+/* If desired, hide the heading since a heading is provided by the tab */
+.tabberlive .tabbertab h2 {
+ display:none;
+}
+.tabberlive .tabbertab h3 {
+ display:none;
+}
+
+/* Example of using an ID to set different styles for the tabs on the page */
+.tabberlive#tab1 {
+}
+.tabberlive#tab2 {
+}
+.tabberlive#tab2 .tabbertab {
+ height:200px;
+ overflow:auto;
+}
+
+.feed-icon {
+	display:none;
+}
+
+#google-cse-results-searchbox-form LABEL
+{
+display: none;
+}
+
+.footer_icon {
+	height:25px;
+	margin-left:2px;
+	  vertical-align: bottom;
+}
+
+#footer2,#block-block-2 {
+	margin-top:5px;
+	display:inline-block;
+	}
+
+#footer .block {
+display: inline-block;
+}
+
+@media (min-width: 960px) {
+/*#block-block-2 {
+	margin-left:5em;
+}
+#footer2 {
+margin-left: 200%;
+  width: 100%;}
+#block-google-cse-google-cse {
+	margin-left:20%;
+}*/
+#footer .block {
+margin-left: 5%;
+}
+#nice-menu-1 {
+margin-top: -2%;
+}
+
+
+
+
+}
+
+footer {
+    text-align: center;
+}
+
+.submitted {
+font-style: italic;
+  font-size: 12px;
+  }
+
+.links {
+	font-style: italic;
+  font-size: 12px;
+  }
+
+ p{
+	margin-top: 0px;
+  margin-bottom: 0.5em;
+}
+
+.field-item ul, .field-item ol {
+    margin-top: 0px;
+}
+
+.field-item img {
+	  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
